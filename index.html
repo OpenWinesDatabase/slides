@@ -26,10 +26,12 @@
 		<div class="reveal">
 			<div class="slides">
 				<section data-state="intro">
-					<h1>Devoxx France 2017<br />sample presentation</h1>
-					<p style="margin-top:22%">Nicolas Martignole <a href="http://twitter.com/nmartignole">@nmartignole</a><br />
-					Zouheir Cadi <a href="http://twitter.com/zouheircadi">@zouheircadi</a><br />
-					Antonio Goncalves <a href="http://twitter.com/agoncal">@agoncal</a></p>
+					<h1>Minimum Viable Product<br />in action!</h1>
+					<p style="margin-top:22%">
+						Chris Woodrow <a href="http://twitter.com/StrangeCousin">@StrangeCousin</a><br />
+						Mathieu Ancelin <a href="http://twitter.com/TrevorReznik">@TrevorReznik</a><br />
+						Sébastien Prunier <a href="http://twitter.com/sebprunier">@sebprunier</a>
+				</p>
 				</section>
 				<section data-state="intro">
 					<h2>Welcome to Devoxx France</h2>
@@ -75,20 +77,20 @@
 					<h3>Step 1 : add to Redis sorted set</h3>
 					<pre><code data-trim data-noescape>127.0.0.1:6363[2]> zadd hackers 1953 "Richard Stallman"
 (integer) 1
-127.0.0.1:6363[2]> 
+127.0.0.1:6363[2]>
 127.0.0.1:6363[2]> zadd hackers 1969 "Linus"
 (integer) 1
-127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing" 
+127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing"
 (integer) 1</code></pre>
 				</section>
 				<section data-transition="none">
 					<h3>Step 2 : Show the list of Hackers</h3>
 					<pre><code data-trim data-noescape><mark>127.0.0.1:6363[2]> zadd hackers 1953 "Richard Stallman"
 (integer) 1
-127.0.0.1:6363[2]> 
+127.0.0.1:6363[2]>
 127.0.0.1:6363[2]> zadd hackers 1969 "Linus"
 (integer) 1
-127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing" 
+127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing"
 (integer) 1</mark>
 127.0.0.1:6363[2]> zrange hackers 0 -1
 1) "Alan turing"
@@ -99,10 +101,10 @@
 					<h3>Step 3 : Show the list with score</h3>
 					<pre><code data-trim data-noescape><mark>127.0.0.1:6363[2]> zadd hackers 1953 "Richard Stallman"
 (integer) 1
-127.0.0.1:6363[2]> 
+127.0.0.1:6363[2]>
 127.0.0.1:6363[2]> zadd hackers 1969 "Linus"
 (integer) 1
-127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing" 
+127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing"
 (integer) 1
 127.0.0.1:6363[2]> zrange hackers 0 -1
 1) "Alan turing"
@@ -120,10 +122,10 @@
 					<h3>Step 4 : Last step with transparent code</h3>
 					<pre><code data-trim data-noescape><mark>127.0.0.1:6363[2]> zadd hackers 1953 "Richard Stallman"
 (integer) 1
-127.0.0.1:6363[2]> 
+127.0.0.1:6363[2]>
 127.0.0.1:6363[2]> zadd hackers 1969 "Linus"
 (integer) 1
-127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing" 
+127.0.0.1:6363[2]> zadd hackers 1912 "Alan turing"
 (integer) 1
 127.0.0.1:6363[2]> zrange hackers 0 -1
 1) "Alan turing"
