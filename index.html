@@ -354,6 +354,86 @@ module.exports = (robot) => {
 					</p>
 				</section>
 
+				<section data-state="flash" align="center">
+					<h1>Let's code !</h1>
+				</section>
+
+				<section data-state="flash" align="center">
+					<h1>Import des données</h1>
+				</section>
+
+				<section align="center">
+					<h2>Pull Request</h2>
+					<p style="margin-top: 5%; font-size: 2.5em;">
+						Merci Guillaume !
+					</p>
+					<img src="images/white-thumbs-up-512.png"
+							 style="max-width: 10%; background: none; box-shadow: none;" />
+				</section>
+
+				<section align="center">
+					<h2>Modélisation des documents</h2>
+					<pre style="margin-top: 5%;"><code class="json" data-trim data-noescape>
+PUT wines/wine/wineries-lobster-reef-wines-marlborough-sauvignon-blanc-2015
+{
+  "@timestamp": "2017-03-28T12:02:33.356Z",
+  "origin": "vivino",
+  "name": "Lobster Reef Sauvignon",
+  "year": "2015",
+  "region": "Marlborough",
+  "color": "Blanc",
+  "country": "New Zealand",
+  "externalPhotoUrl": "http://images.vivino.com/thumbs/CRTNjV0cTxKjmE5qYXbqrQ_375x500.jpg"
+}
+					</code></pre>
+				</section>
+
+				<section align="center">
+					<h2>Template</h2>
+					<p style="margin-top: 5%;">
+						TODO
+					</p>
+				</section>
+
+				<section align="center">
+					<h2>CSV -&gt; Elasticsearch</h2>
+					<p style="margin-top: 5%;">
+						Script NodeJs utilisant l'API Bulk d'Elasticsearch
+					</p>
+					<p style="font-size: 0.8em;">
+						<a href="https://github.com/OpenWinesDatabase/csv-to-elasticsearch-template">
+							https://github.com/OpenWinesDatabase/csv-to-elasticsearch-template
+						</a>
+					</p>
+					<pre style="margin-top: 5%;"><code class="json" data-trim data-noescape>
+POST _bulk
+{ "index" : { "_index" : "wines", "_type" : "wine", "_id" : "haut-brion-1982" } }
+{ "name": "Haut Brion", "year": "1982", "country": "France", ...}
+{ "index" : { "_index" : "wines", "_type" : "wine", "_id" : "chateau-margaux-1990" } }
+{ "name": "Château Margaux", "year": "1990", "country": "France", ...}
+					</code></pre>
+				</section>
+
+				<section align="center">
+					<h2>Kibana - Discover</h2>
+					<p>
+						<img src="images/screenshots/kibana-discover.png"
+								 style="max-width: 80%; background: none; box-shadow: none;" />
+					</p>
+				</section>
+
+				<section align="center">
+					<h2>Kibana - Dashboards</h2>
+					<p>
+						<img src="images/screenshots/kibana-dashboard.png"
+								 style="max-width: 80%; background: none; box-shadow: none;" />
+					</p>
+				</section>
+
+				<section data-state="flash" align="center">
+					<h1>Browse &amp; Search</h1>
+				</section>
+
 				<section align="center">
 					<h2>Première démo à Jean-Paul</h2>
 					<iframe width="800" height="450"
