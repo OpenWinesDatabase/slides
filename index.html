@@ -265,7 +265,7 @@
 				</section>
 
 				<section align="center">
-					<h2>Redux is not mandatory</h2>
+					<h2>Redux n'est pas obligatoire</h2>
 					<div style="margin-top: 5%;">
 						<img src="images/logos/no-redux.png"
 								style="max-width: 30%; background: none; box-shadow: none;" />
@@ -334,6 +334,24 @@
 					<h2>Hubot &amp; Slack</h2>
 					<img src="images/screenshots/hubot-slack.png"
 							 style="margin-top: 5%; max-width: 60%; background: none; box-shadow: none;" />
+				</section>
+
+				<section align="center">
+					<h2>Exemple de script Hubot</h2>
+					<pre style="margin-top: 3%;"><code class="javascript" data-trim data-noescape>
+module.exports = (robot) => {
+
+  robot.respond(/give a kiss to @(.*)/i, (res) => {
+    const to = res.match[1]
+    res.send(`@${to} :kiss: de la part de @${res.envelope.user.name} ;-)`);
+  })
+}
+					</code></pre>
+					<img src="images/screenshots/hubot-kiss.png"
+							 style="max-width: 40%; background: none; box-shadow: none;" />
+					<p>
+						<a href="https://github.com/OpenWinesDatabase/hubot">https://github.com/OpenWinesDatabase/hubot</a>
+					</p>
 				</section>
 
 				<section align="center">
