@@ -130,6 +130,107 @@
 				<section data-state="fullimg" data-background="images/photos/IMG_1951.jpg" />
 				</section>
 
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - Personna
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%">
+						Alain l'amateur de vins
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - Catégories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						Connexion
+					</div>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						Recherche
+					</div>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%">
+						Contribution
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - User Stories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						<p>
+							<b>[Recherche]</b>
+						</p>
+						<p>
+							En tant que <b>Alain</b>, je souhaite pouvoir parcourir l'ensemble des vins d'une région viticole d'un pays.
+						</p>
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - User Stories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						<p>
+							<b>[Recherche]</b>
+						</p>
+						<p>
+							En tant que <b>Alain</b>, je souhaite pouvoir rechercher des informations sur un vin en recherchant "comme sur Google".
+						</p>
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - User Stories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						<p>
+							<b>[Connexion]</b>
+						</p>
+						<p>
+							En tant que <b>Alain</b>, je souhaite pouvoir m'identifier avec mon compte Google.
+						</p>
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - User Stories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						<p>
+							<b>[Contribution]</b>
+						</p>
+						<p>
+							En tant que <b>Alain</b>, je souhaite pouvoir ajouter un vin qui n'existe pas encore.
+						</p>
+					</div>
+				</section>
+
+				<section align="center">
+					<h2>Résultat du Story Mapping</h2>
+					<p style="font-size: 2em; margin-top: 3%;">
+						Must - User Stories
+					</p>
+					<div style="border: 2px solid white; padding: 12px; margin-left: 20%; margin-right: 20%; margin-bottom: 12px;">
+						<p>
+							<b>[Contribution]</b>
+						</p>
+						<p>
+							En tant que <b>Alain</b>, je souhaite pouvoir modifier les informations d'un vin existant, photo comprise.
+						</p>
+					</div>
+				</section>
+
 				<section data-state="flash" align="center">
 					<h1>Mobile First</h1>
 				</section>
@@ -483,6 +584,230 @@ POST _bulk
 					</p>
 					<img src="images/white-thumbs-up-512.png"
 							 style="max-width: 10%; background: none; box-shadow: none;" />
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Requête ES pour la liste des pays
+					</p>
+					<pre><code class="json" data-trim data-noescape>
+POST /wines/_search
+{
+  "size": 0,
+  "aggs" : {
+    "countries" : {
+      "terms" : {
+        "field" : "country.keyword",
+        "size" : 30,
+        "order" : { "_count" : "desc" }
+      }
+    }
+  }
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Requête ES pour la liste des régions d'un pays
+					</p>
+					<pre><code class="json" data-trim data-noescape>
+POST /wines/_search
+{
+  "query": {
+    "match" : {
+        "country" : "France"
+    }
+  },
+  "size": 0,
+  "aggs" : {
+      "regions" : {
+          "terms" : {
+            "field" : "region.keyword",
+            "size" : 200,
+            "order" : { "_count" : "desc" }
+          }
+      }
+  }
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Requête ES pour la liste des vins d'une région
+					</p>
+					<pre><code class="json" data-trim data-noescape>
+POST /wines/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "country.keyword": "France" }},
+        { "match": { "region.keyword": "Pomerol" }}
+      ]
+    }
+  },
+  "size": 200
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Requête ES pour la recherche "à la Google"
+					</p>
+					<pre><code class="json" data-trim data-noescape>
+POST /wines/_search
+{
+  "query": {
+    "multi_match": {
+      "fields": [ "year", "region", "name^2" ],
+      "query": "Haut Brion 1982"
+    }
+  },
+  "size": 20
+}
+					</code></pre>
+					<p>
+						<i>"name^2" permet de booster la recherche sur le nom du vin</i>
+					</p>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Détail d'un vin (un peu de Scala quand même... &#x1F609;)
+					</p>
+					<pre><code class="scala" data-trim data-noescape>
+def wine(id: String) = WineAction.async { ctx =>
+  WS.url(Env.esServiceURL + s"/wines/wine/$id")
+    .withAuth(Env.esServiceLogin, Env.esServicePassword, WSAuthScheme.BASIC)
+    .get()
+    .map(response => {
+      val found: Boolean = (response.json \ "found").as[Boolean]
+      if (!found) {
+        NotFound("Wine not found")
+      } else {
+        Ok((response.json \ "_source").as[JsValue])
+      }
+    })
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Router React
+					</p>
+					<pre><code class="javascript" data-trim data-noescape>
+export class RoutedApp extends Component {
+    render() {
+        return (
+            &lt;Router history={browserHistory}&gt;
+                &lt;Route path="/" component={App}&gt;
+                    &lt;IndexRoute component={Home} /&gt;
+                    &lt;Route path="search" component={SearchWines} /&gt;
+                    &lt;Route path="browse/countries" component={BrowseCountries} /&gt;
+                    &lt;Route path="browse/regions" component={BrowseRegions} /&gt;
+                    &lt;Route path="browse/wines" component={BrowseWines} /&gt;
+                &lt;/Route&gt;
+            &lt;/Router&gt;
+        )
+    }
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Page des pays (1/3)
+					</p>
+					<pre><code class="javascript" data-trim data-noescape>
+export class BrowseCountries extends Component {
+
+    state = {
+        loading: true,
+        countries: []
+    };
+
+    componentDidMount() {...}
+
+    render() {...}
+
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Page des pays (2/3)
+					</p>
+					<pre><code class="javascript" data-trim data-noescape>
+componentDidMount() {
+    fetch(`/api/countries`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(r => r.json()).then(data => {
+        this.setState({
+            countries: data.countries,
+            loading: false
+        });
+    });
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Morceaux choisis</h2>
+					<p>
+						Page des pays (3/3)
+					</p>
+					<pre><code class="javascript" style="font-size: 0.7em; line-height: 1.2;" data-trim data-noescape>
+render() {
+    return (
+        &lt;div className="text-center"&gt;
+            &lt;h1&gt;Countries&lt;/h1&gt;
+            {this.state.loading &amp;&amp; (
+                    &lt;div className="progress" style={{ width: '100%' }}&gt;
+                        &lt;div className="progress-bar progress-bar-striped active" role="progressbar" style={{ width: '100%' }}&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+            )}
+            &lt;div className="row"&gt;
+            {this.state.countries.map(country =&gt; (
+                    &lt;div className="col-sm-4" key={country.name}&gt;
+                        &lt;div className="list-entry"&gt;
+                            &lt;Link to={{ pathname: '/browse/regions', query: { country: country.name } }}&gt;
+                                {country.name}
+                            &lt;/Link&gt;
+                            &lt;span className="badge"&gt;{country.totalWines}&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+            ))}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+					</code></pre>
+				</section>
+
+				<section align="center">
+					<h2>Morceaux choisis</h2>
+					<p style="font-size: 1.5em; margin-top: 5%;">
+						Pour tous les détails, l'ensemble du code est disponible sur
+						<a href="https://github.com/OpenWinesDatabase">
+							https://github.com/OpenWinesDatabase
+						</a>
+					</p>
 				</section>
 
 				<section align="center">
